@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="QQ 流量分析（PC–PC 端、PC–手机端） 分析对象：pc-pc.pcapng（542 包 &#x2F; 19.93 s）、pc-mobile.pcapng（1640 包 &#x2F; 19.51 s）、data.bin　｜　工具：Wireshark 4.6.9 核心结论：QQ 的文件本体走 TCP。PC–PC 是点对点直连且被 TLS 1.3 加密，无法还原；PC–手机 是”在线中转”，用明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2026/10/26/QQ%20%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90%EF%BC%88PC%E2%80%93PC%20%E7%AB%AF%E3%80%81PC%E2%80%93%E6%89%8B%E6%9C%BA%E7%AB%AF%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="QQ 流量分析（PC–PC 端、PC–手机端） 分析对象：pc-pc.pcapng（542 包 &#x2F; 19.93 s）、pc-mobile.pcapng（1640 包 &#x2F; 19.51 s）、data.bin　｜　工具：Wireshark 4.6.9 核心结论：QQ 的文件本体走 TCP。PC–PC 是点对点直连且被 TLS 1.3 加密，无法还原；PC–手机 是”在线中转”，用明">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/image1.png">
+<meta property="article:published_time" content="2026-10-26T08:39:36.000Z">
+<meta property="article:modified_time" content="2026-10-26T17:01:17.248Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/image1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-QQ 流量分析（PC–PC 端、PC–手机端）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/10/26/QQ%20%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90%EF%BC%88PC%E2%80%93PC%20%E7%AB%AF%E3%80%81PC%E2%80%93%E6%89%8B%E6%9C%BA%E7%AB%AF%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2026-10-26T08:39:36.000Z" itemprop="datePublished">2026-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>QQ 流量分析（PC–PC 端、PC–手机端）</strong></p>
+<p>分析对象：pc-pc.pcapng（542 包 &#x2F; 19.93 s）、pc-mobile.pcapng（1640 包 &#x2F; 19.51 s）、data.bin　｜　工具：Wireshark 4.6.9</p>
+<p><strong>核心结论：QQ 的文件本体走 TCP。PC–PC 是点对点直连且被 TLS 1.3 加密，无法还原；PC–手机 是”在线中转”，用明文 HTTP(8080) 上传到 QQ 文件服务器，可还原。本次已成功恢复 1 个 PNG 文件。</strong></p>
+<h1 id="一、总体结论（作业答案核心）"><a href="#一、总体结论（作业答案核心）" class="headerlink" title="一、总体结论（作业答案核心）"></a>一、总体结论（作业答案核心）</h1><table>
+<thead>
+<tr>
+<th><strong>对比项</strong></th>
+<th><strong>pc-pc.pcapng（PC–PC 端）</strong></th>
+<th><strong>pc-mobile.pcapng（PC–手机端）</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>文件传输协议</td>
+<td>TCP（UDP 只跑心跳&#x2F;在线状态）</td>
+<td>TCP（UDP 只跑心跳&#x2F;信令）</td>
+</tr>
+<tr>
+<td>传输方式</td>
+<td>点对点直连（P2P）：本机 50468 → 对端 IPv6:443</td>
+<td>在线中转：POST 到 QQ 文件服务器 157.148.55.114:8080</td>
+</tr>
+<tr>
+<td>加密 &#x2F; 明文</td>
+<td>加密：TLS 1.3，应用数据全为密文</td>
+<td>明文：HTTP 请求头 + 原始文件字节可见</td>
+</tr>
+<tr>
+<td>能否恢复文件</td>
+<td>不能（无密钥）</td>
+<td>能，已还原 1 张 PNG 图片</td>
+</tr>
+<tr>
+<td>恢复结果</td>
+<td>—</td>
+<td>9193EE214DDCCC5B2FB405CAEC7B229B.png，486×652，427,237 B，MD5 9193ee214ddccc5b2fb405caec7b229b</td>
+</tr>
+</tbody></table>
+<h1 id="二、判断过程与证据"><a href="#二、判断过程与证据" class="headerlink" title="二、判断过程与证据"></a>二、判断过程与证据</h1><h2 id="1-用什么协议：TCP-还是-UDP"><a href="#1-用什么协议：TCP-还是-UDP" class="headerlink" title="1. 用什么协议：TCP 还是 UDP"></a>1. 用什么协议：TCP 还是 UDP</h2><p>统计 → 会话（Conversations），按字节数排序：</p>
+<ul>
+<li>pc-pc.pcapng：最大的流是 TCP [2409:895c:…:ca88]:50468 ↔ [2408:8748:c110:333::31]:443，190 包 &#x2F; 约 197 kB，其中下载 192 kB、持续 0.55 s，就是这次传文件的流（tcp.stream eq 34）。</li>
+<li>pc-pc.pcapng：UDP 只有 172.20.10.10:19420 ↔ 112.49.67.69:11091 等 9 个包、约 1.3 kB，载荷是 QQ 私有混淆格式、仅几十字节，不含文件内容。</li>
+<li>pc-mobile.pcapng：最大的流是 TCP 172.20.10.10:59078 → 157.148.55.114:8080，497 包 &#x2F; 458 kB，其中上传 447 kB（tcp.stream eq 67）。</li>
+<li>pc-mobile.pcapng：UDP 只有 11091（心跳）与 6896 &#x2F; 6996 等端口的小包，同样是信令。</li>
+</ul>
+<p><strong>结论：文件数据本身走 TCP；QQ 的 UDP 只用于保活、在线状态和打洞探测。</strong></p>
+<h2 id="2-加密还是明文"><a href="#2-加密还是明文" class="headerlink" title="2. 加密还是明文"></a>2. 加密还是明文</h2><p><strong>（1）pc-pc.pcapng —— 加密（TLS 1.3）</strong></p>
+<ul>
+<li>过滤 tls.handshake 可见 Client Hello（frame 306）与 Server Hello（frame 311）。</li>
+<li>Client Hello 的 SNI 直接是对端的 IPv6 地址 2408:8748:c110:333:31::（不是域名），说明是点对点直连。</li>
+<li>supported_versions &#x3D; 0x0304（TLS 1.3），服务器选定 TLS_AES_128_GCM_SHA256（0x1301）。</li>
+<li>之后该流全是 Application Data，看不到请求行、文件名或文件头。</li>
+</ul>
+<p>用文件头特征码搜索，全部落空：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tcp contains 89:50:4e:47   （PNG）          tcp contains 50:4b:03:04   （ZIP/docx/xlsx）</span><br><span class="line">tcp contains ff:d8:ff      （JPEG）         tcp contains 52:61:72:21   （RAR）</span><br><span class="line">tcp contains 25:50:44:46   （%PDF）         tcp contains 47:49:46:38   （GIF）</span><br><span class="line">tcp contains 1f:8b:08      （GZIP）         → 以上全部 0 命中</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>整份 pc-pc.pcapng 里唯一可读的 HTTP 是微信的 &#x2F;mmtls&#x2F;… 与 Windows 联网探测，与本次 QQ 传文件无关。</li>
+</ul>
+<p><strong>（2）pc-mobile.pcapng —— 明文（QQ 私有 httpconn + HTTP）</strong></p>
+<p>过滤 http.request 直接就能读出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">POST /cgi-bin/httpconn?htcmd=0x6ff0082&amp;uin=2787197981 HTTP/1.1   ← 探测（PicUp.Echo）</span><br><span class="line">POST /cgi-bin/httpconn?htcmd=0x6FF0087&amp;uin=2787197981 HTTP/1.1   ← 真正上传（PicUp.DataUp）</span><br><span class="line">Host: 157.148.55.114:8080</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2)</span><br><span class="line">Content-Length: 428597</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>0x6ff0082 &#x3D; PicUp.Echo：客户端先向候选服务器（157.148.55.114:8080、122.96.96.144:443）发探测，收到 200 OK 后再选一条上传。</li>
+<li>0x6FF0087 &#x3D; PicUp.DataUp：真正携带文件。请求在 frame 1101 开始、body 一直到 frame 1515，服务器在 frame 1598 回 200 OK（152 B，回包里带 PicUp.DataUp 与同一个 MD5）。</li>
+<li>在”追踪流 → TCP”里可直接看到 89 50 4E 47 0D 0A 1A 0A（PNG 文件头），文件内容完全可读 → 明文。</li>
+</ul>
+<h2 id="3-恢复明文文件"><a href="#3-恢复明文文件" class="headerlink" title="3. 恢复明文文件"></a>3. 恢复明文文件</h2><p>上传请求体（Content-Length: 428597）中，QQ 的封装格式为：</p>
+<table>
+<thead>
+<tr>
+<th><strong>偏移</strong></th>
+<th><strong>长度</strong></th>
+<th><strong>内容</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x00</td>
+<td>1</td>
+<td>0x28（’(‘）帧开始标记</td>
+</tr>
+<tr>
+<td>0x01</td>
+<td>4</td>
+<td>00 00 05 46 &#x3D; 1350，其后的 protobuf 元数据长度</td>
+</tr>
+<tr>
+<td>0x05</td>
+<td>4</td>
+<td>00 06 84 E5 &#x3D; 427 237，文件长度</td>
+</tr>
+<tr>
+<td>0x09</td>
+<td>1350</td>
+<td>protobuf 元数据（PicUp.DataUp、uin、文件名、MD5、下载 URL…）</td>
+</tr>
+<tr>
+<td>0x549</td>
+<td>427 237</td>
+<td>文件原始字节（从 89 50 4E 47 开始）</td>
+</tr>
+<tr>
+<td>末尾</td>
+<td>1</td>
+<td>0x29（’)’）帧结束标记</td>
+</tr>
+</tbody></table>
+<p>元数据中可直接读出的关键字段：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PicUp.DataUp                                    命令字</span><br><span class="line">2787197981                                      发送方 QQ 号</span><br><span class="line">9193EE214DDCCC5B2FB405CAEC7B229B.png            文件名</span><br><span class="line">9193ee214ddccc5b2fb405caec7b229b                文件 MD5</span><br><span class="line">/download?appid=1406&amp;fileid=EhQguqv0lMrsa7-…&amp;spec=0&amp;spec=720&amp;spec=198</span><br><span class="line">multimedia.nt.qq.com.cn                         下载域名（手机端从此下载）</span><br><span class="line">30.46.180.206 / 30.46.180.246 / 11.142.81.246 / 11.142.81.249    候选服务器</span><br></pre></td></tr></table></figure>
+
+<p><strong>恢复步骤（特征码定位法）：</strong></p>
+<ul>
+<li>定位 tcp.stream eq 67（或过滤 http.request.method&#x3D;&#x3D;”POST” &amp;&amp; http.request.uri contains “6FF0087”）。</li>
+<li>在字节视图搜 PNG 文件头 89 50 4E 47 0D 0A 1A 0A，命中位置 frame 1102（文件内偏移 1359）。</li>
+<li>从该处取到结束块 00 00 00 00 49 45 4E 44 AE 42 60 82（IEND+CRC），另存为 .png；也可用”追踪流 → TCP → Raw”另存后按偏移切分。</li>
+<li>校验：427 237 字节；IHDR 中宽 0x01E6 &#x3D; 486、高 0x028C &#x3D; 652、位深 8、颜色类型 6（RGBA）；MD5 &#x3D; 9193ee214ddccc5b2fb405caec7b229b，与报文中的 MD5、文件名完全一致 → 恢复完整、成功。</li>
+</ul>
+<p>恢复出的图片（天安门 + 五星红旗 + 和平鸽、气球的手绘图）：</p>
+<p><img src="/./img/image1.png" alt="这里写图片说明"></p>
+<h1 id="三、为什么-PC–PC-端恢复不出来"><a href="#三、为什么-PC–PC-端恢复不出来" class="headerlink" title="三、为什么 PC–PC 端恢复不出来"></a>三、为什么 PC–PC 端恢复不出来</h1><ul>
+<li>该流是 TLS 1.3：密钥由 ECDHE 临时协商，抓包中只有 Client Hello &#x2F; Server Hello &#x2F; Application Data，没有密钥材料，也没有可用 RSA 私钥解出的预主密钥。</li>
+<li>而且它是直连（SNI 就是对端 IP，没有经过 QQ 的明文中转服务器），所以也没有”服务器上存在明文文件”这条退路。</li>
+<li>因此 PC–PC 流量只能做流量层面分析（五元组、连接时长、上下行字节数、包长分布、时序特征），不能还原文件内容。</li>
+<li>想解密只有两个前提：抓到 SSLKEYLOGFILE（客户端密钥日志）或拿到服务器私钥，本实验都不具备。</li>
+</ul>
+<h1 id="四、关于导出的-data-bin（这里有个坑）"><a href="#四、关于导出的-data-bin（这里有个坑）" class="headerlink" title="四、关于导出的 data.bin（这里有个坑）"></a>四、关于导出的 data.bin（这里有个坑）</h1><p><strong>data.bin 不是文件本体，原因有两条：</strong></p>
+<ul>
+<li>取错流了：它来自 tcp.stream eq 9（[2408:8756:f50:3049::20]:443 ↔ 本机:64434），是一条 TLS 加密流，本就不含明文文件；真正传文件的是 tcp.stream eq 67（157.148.55.114:8080）。</li>
+<li>保存格式错了：它是”追踪 TCP 流 → 显示为 ASCII”后另存的文本——不可打印字节全部被替换成 ‘.’（0x2E），方向切换处插入 0x09(Tab)，所以满屏 2E 2E 2E 2E 24 73 …。</li>
+<li>校验：tcp.stream 9 的有效载荷共 5016 字节，data.bin 为 5028 字节（多出的是换行&#x2F;Tab 等文本字节），前缀与 ASCII 视图逐字节一致，可确认来源。</li>
+<li>因此拿它去搜 FF D8 FF（JPEG 头）当然”找不到”。正确做法是在 tcp.stream eq 67 上”追踪流 → Raw”（或”文件 → 导出对象 → HTTP”），再按 89 50 4E 47 定位切分。</li>
+</ul>
+<h1 id="五、结论（简版）"><a href="#五、结论（简版）" class="headerlink" title="五、结论（简版）"></a>五、结论（简版）</h1><ul>
+<li>UDP or TCP？文件传输走 TCP（PC–PC 用 443 直连；PC–手机 用 8080 的 HTTP 上传）。QQ 同时使用 UDP（11091、6896&#x2F;6996 等）发送心跳、在线状态与打洞探测，但这些小包不携带文件数据。</li>
+<li>加密 or 明文？PC–PC：加密，TLS 1.3（0x0304，TLS_AES_128_GCM_SHA256），SNI 为对端 IP，属点对点直连，应用数据不可读。PC–手机：明文，QQ 私有 httpconn 协议跑在 HTTP&#x2F;1.1 上（htcmd&#x3D;0x6FF0087，uin&#x3D;2787197981），请求头、文件名、MD5、文件内容全部可见。</li>
+<li>恢复明文文件：用文件头特征码定位——PNG 89 50 4E 47 0D 0A 1A 0A、JPEG FF D8 FF、PDF 25 50 44 46、ZIP 50 4B 03 04、RAR 52 61 72 21、GIF 47 49 46 38；从特征码截取到文件结束标志（PNG 为 IEND+CRC）即可还原。本次从 pc-mobile.pcapng 的 tcp.stream 67 还原出 9193EE214DDCCC5B2FB405CAEC7B229B.png（486×652，427 237 B，MD5 9193ee214ddccc5b2fb405caec7b229b，与报文 MD5 一致）。链路：PC 172.20.10.10:59078 → QQ 文件服务器 157.148.55.114:8080（&#x2F;cgi-bin&#x2F;httpconn?htcmd&#x3D;0x6FF0087），手机端再从 multimedia.nt.qq.com.cn&#x2F;download?appid&#x3D;1406&amp;fileid&#x3D;… 下载，即”在线传输（服务器中转）”。</li>
+<li>两种方式的差别：在线中转（PC–手机）为兼容与穿透走 HTTP 明文，可被直接还原；点对点直连（PC–PC）已用 TLS 1.3 加密，抓包也无法还原。所以”QQ 文件传输能否被还原”不能一概而论，要看走的是哪条路径。</li>
+</ul>
+<h1 id="六、复现步骤（Wireshark-操作清单）"><a href="#六、复现步骤（Wireshark-操作清单）" class="headerlink" title="六、复现步骤（Wireshark 操作清单）"></a>六、复现步骤（Wireshark 操作清单）</h1><p>1. 打开 pc-mobile.pcapng → 统计 → 会话 → TCP，按 Bytes 排序，找到 172.20.10.10:59078 ↔ 157.148.55.114:8080（447 kB）。</p>
+<p>2. 右键该会话 → 追踪流 → TCP，”显示数据为”选 ASCII，可看到 POST &#x2F;cgi-bin&#x2F;httpconn?htcmd&#x3D;0x6FF0087&amp;uin&#x3D;2787197981，往下就是 ‰PNG。</p>
+<p>3. 过滤 http.request.method&#x3D;&#x3D;”POST” → 文件 → 导出对象 → HTTP；或按 tcp contains 89:50:4e:47 定位后”显示分组字节 → 另存为”。</p>
+<p>4. 用 HxD 打开导出文件：确认开头 89 50 4E 47 0D 0A 1A 0A、结尾 49 45 4E 44 AE 42 60 82；计算 MD5 与报文中的 9193ee214ddccc5b2fb405caec7b229b 对比。</p>
+<p>5. 打开 pc-pc.pcapng → 过滤 tls → 选中 tcp.stream eq 34 的 Client Hello，查看 SNI&#x3D;2408:8748:c110:333:31::、supported_versions&#x3D;0x0304，确认 TLS 1.3 加密；再用 tcp contains 搜各类文件头，验证无明文文件。</p>
+<h1 id="附：关键数据速查"><a href="#附：关键数据速查" class="headerlink" title="附：关键数据速查"></a>附：关键数据速查</h1><table>
+<thead>
+<tr>
+<th><strong>项目</strong></th>
+<th><strong>值</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PC–PC 传文件流</td>
+<td>tcp.stream 34，[…]ca88:50468 → [2408:8748:c110:333::31]:443，TCP，190 包 &#x2F; ≈197 kB &#x2F; 0.55 s</td>
+</tr>
+<tr>
+<td>PC–PC 加密方式</td>
+<td>TLS 1.3（0x0304），TLS_AES_128_GCM_SHA256（0x1301），SNI &#x3D; 对端 IP</td>
+</tr>
+<tr>
+<td>PC–手机 传文件流</td>
+<td>tcp.stream 67，172.20.10.10:59078 → 157.148.55.114:8080，TCP，497 包 &#x2F; 458 kB</td>
+</tr>
+<tr>
+<td>上传命令</td>
+<td>POST &#x2F;cgi-bin&#x2F;httpconn?htcmd&#x3D;0x6FF0087&amp;uin&#x3D;2787197981，Content-Length: 428597</td>
+</tr>
+<tr>
+<td>文件在 body 中偏移</td>
+<td>1359（&#x3D; 9 字节帧头 + 1350 字节 protobuf 元数据）</td>
+</tr>
+<tr>
+<td>恢复文件</td>
+<td>9193EE214DDCCC5B2FB405CAEC7B229B.png，486×652，427 237 B，MD5 9193ee214ddccc5b2fb405caec7b229b</td>
+</tr>
+<tr>
+<td>QQ 心跳（UDP）</td>
+<td>112.49.67.69:11091（39 B&#x2F;包）、6896 &#x2F; 6996 等，仅信令，不含文件</td>
+</tr>
+<tr>
+<td>data.bin</td>
+<td>tcp.stream 9 的 ASCII 视图另存（5016 B 载荷，非打印字节→0x2E），非文件本体</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/10/26/QQ%20%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90%EF%BC%88PC%E2%80%93PC%20%E7%AB%AF%E3%80%81PC%E2%80%93%E6%89%8B%E6%9C%BA%E7%AB%AF%EF%BC%89/" data-id="cuid0B3K3fbV80Dkb7D9NPSRh" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2026/10/01/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">网络渗透测试学习记录</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kali/" rel="tag">Kali</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Kali/" style="font-size: 10px;">Kali</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">渗透测试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/10/">October 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/10/26/QQ%20%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90%EF%BC%88PC%E2%80%93PC%20%E7%AB%AF%E3%80%81PC%E2%80%93%E6%89%8B%E6%9C%BA%E7%AB%AF%EF%BC%89/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2026/10/01/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">网络渗透测试学习记录</a>
+          </li>
+        
+          <li>
+            <a href="/2026/10/01/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
