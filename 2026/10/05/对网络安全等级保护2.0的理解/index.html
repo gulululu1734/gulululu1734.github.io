@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>对网络安全等级保护2.0（等保2.0）的理解 | 咕噜噜的博客</title><meta name="author" content="gulululu"><meta name="copyright" content="gulululu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="对网络安全等级保护2.0（等保2.0）的理解 作业：参阅资料，描述你对等保2.0的理解。  一、什么是等保2.0等保2.0，即网络安全等级保护制度 2.0，是我国在网络安全领域实行的一项基本制度——对网络和信息系统按照其重要程度、遭破坏后的危害程度进行分级保护，做到”定级、备案、建设整改、等级测评、监督检查”全流程闭环管理。它是我国网络安全管理体系的基础性制度，也是《中华人民共和国网络安全法》明确">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对网络安全等级保护2.0（等保2.0）的理解">
+<meta property="og:url" content="https://gulululu1734.github.io/2026/10/05/%E5%AF%B9%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A42.0%E7%9A%84%E7%90%86%E8%A7%A3/index.html">
+<meta property="og:site_name" content="咕噜噜的博客">
+<meta property="og:description" content="对网络安全等级保护2.0（等保2.0）的理解 作业：参阅资料，描述你对等保2.0的理解。  一、什么是等保2.0等保2.0，即网络安全等级保护制度 2.0，是我国在网络安全领域实行的一项基本制度——对网络和信息系统按照其重要程度、遭破坏后的危害程度进行分级保护，做到”定级、备案、建设整改、等级测评、监督检查”全流程闭环管理。它是我国网络安全管理体系的基础性制度，也是《中华人民共和国网络安全法》明确">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gulululu1734.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-10-05T12:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-02T16:42:24.515Z">
+<meta property="article:author" content="gulululu">
+<meta property="article:tag" content="GB&#x2F;T 22239">
+<meta property="article:tag" content="信息安全">
+<meta property="article:tag" content="等保2.0">
+<meta property="article:tag" content="网络安全等级保护">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gulululu1734.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "对网络安全等级保护2.0（等保2.0）的理解",
+  "url": "https://gulululu1734.github.io/2026/10/05/%E5%AF%B9%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A42.0%E7%9A%84%E7%90%86%E8%A7%A3/",
+  "image": "https://gulululu1734.github.io/img/butterfly-icon.png",
+  "datePublished": "2026-10-05T12:00:00.000Z",
+  "dateModified": "2026-11-02T16:42:24.515Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "gulululu",
+      "url": "https://gulululu1734.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gulululu1734.github.io/2026/10/05/%E5%AF%B9%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A42.0%E7%9A%84%E7%90%86%E8%A7%A3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '对网络安全等级保护2.0（等保2.0）的理解',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">咕噜噜的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">对网络安全等级保护2.0（等保2.0）的理解</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">对网络安全等级保护2.0（等保2.0）的理解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-10-05T12:00:00.000Z" title="发表于 2026-10-05 20:00:00">2026-10-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-11-02T16:42:24.515Z" title="更新于 2026-11-03 00:42:24">2026-11-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="对网络安全等级保护2-0（等保2-0）的理解"><a href="#对网络安全等级保护2-0（等保2-0）的理解" class="headerlink" title="对网络安全等级保护2.0（等保2.0）的理解"></a>对网络安全等级保护2.0（等保2.0）的理解</h1><blockquote>
+<p>作业：参阅资料，描述你对等保2.0的理解。</p>
+</blockquote>
+<h2 id="一、什么是等保2-0"><a href="#一、什么是等保2-0" class="headerlink" title="一、什么是等保2.0"></a>一、什么是等保2.0</h2><p><strong>等保2.0</strong>，即<strong>网络安全等级保护制度 2.0</strong>，是我国在网络安全领域实行的一项基本制度——对网络和信息系统按照其重要程度、遭破坏后的危害程度进行<strong>分级保护</strong>，做到”定级、备案、建设整改、等级测评、监督检查”全流程闭环管理。它是我国网络安全管理体系的基础性制度，也是《中华人民共和国网络安全法》明确要求的法定制度（第21条：”国家实行网络安全等级保护制度”）。</p>
+<h2 id="二、从-1-0-到-2-0：制度升级的背景"><a href="#二、从-1-0-到-2-0：制度升级的背景" class="headerlink" title="二、从 1.0 到 2.0：制度升级的背景"></a>二、从 1.0 到 2.0：制度升级的背景</h2><ul>
+<li><strong>1.0 时代（2007 年起）</strong>：以《信息安全等级保护管理办法》（公通字[2007]43号）为标志，等级保护 1.0 正式启动，主要围绕传统”信息系统”展开，规定了定级备案、建设整改、等级测评和监督检查等”规定动作”。</li>
+<li><strong>2.0 时代（2017 年起）</strong>：2017 年《网络安全法》实施，明确了”国家实行网络安全等级保护制度”，等级保护 2.0 正式启动；2019 年发布《网络安全等级保护基本要求》（GB&#x2F;T 22239-2019）等核心标准，配套标准在 2018-2020 年间陆续更新，形成完整的 2.0 标准体系。</li>
+</ul>
+<p>2.0 升级的根本原因，是<strong>信息技术的发展改变了保护对象</strong>：今天的网络环境早已不只是传统的服务器和信息系统，而是云平台、大数据、物联网、工业控制系统、移动应用交织的复杂生态。1.0 时代”以信息系统为中心”的防护思路已经不够用了，需要一套能覆盖新技术的分级防护机制。</p>
+<h2 id="三、等保2-0的等级划分"><a href="#三、等保2-0的等级划分" class="headerlink" title="三、等保2.0的等级划分"></a>三、等保2.0的等级划分</h2><p>根据《计算机信息系统安全保护等级划分准则》（GB 17859-1999）和《网络安全等级保护定级指南》（GB&#x2F;T 22240-2020），等级保护对象按<strong>遭到破坏后对国家安全、社会秩序、公共利益以及公民、法人和其他组织的合法权益的危害程度</strong>，由低到高分为<strong>五个安全保护等级</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>等级</th>
+<th>名称</th>
+<th>典型对象</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一级</td>
+<td>自主保护级</td>
+<td>一般小型网站、个人系统</td>
+</tr>
+<tr>
+<td>第二级</td>
+<td>指导保护级</td>
+<td>一般企事业单位内部系统</td>
+</tr>
+<tr>
+<td>第三级</td>
+<td>监督保护级</td>
+<td>地市级政务系统、金融、医疗等重要系统</td>
+</tr>
+<tr>
+<td>第四级</td>
+<td>强制保护级</td>
+<td>省级以上重要系统、关键信息基础设施</td>
+</tr>
+<tr>
+<td>第五级</td>
+<td>专控保护级</td>
+<td>涉及国家秘密、极端重要的专用系统</td>
+</tr>
+</tbody></table>
+<p>定级时主要考虑两个要素：<strong>受侵害的客体</strong>（国家安全、社会秩序&#x2F;公共利益、公民&#x2F;法人合法权益）和<strong>侵害的程度</strong>（一般损害、严重损害、特别严重损害）。级别越高，安全要求越严格。</p>
+<h2 id="四、等保2-0的核心框架"><a href="#四、等保2-0的核心框架" class="headerlink" title="四、等保2.0的核心框架"></a>四、等保2.0的核心框架</h2><h3 id="4-1-标准体系"><a href="#4-1-标准体系" class="headerlink" title="4.1 标准体系"></a>4.1 标准体系</h3><p>等保2.0 标准体系的核心标准包括：</p>
+<ul>
+<li>《网络安全等级保护实施指南》（GB&#x2F;T 25058-2019）</li>
+<li>《网络安全等级保护定级指南》（GB&#x2F;T 22240-2020）</li>
+<li><strong>《网络安全等级保护基本要求》（GB&#x2F;T 22239-2019）</strong>——最核心的执行标准</li>
+<li>《网络安全等级保护设计技术要求》（GB&#x2F;T 25070-2019）</li>
+<li>《网络安全等级保护测评要求》（GB&#x2F;T 28448-2019）</li>
+<li>《网络安全等级保护测评过程指南》（GB&#x2F;T 28449-2018）</li>
+</ul>
+<h3 id="4-2-“一个中心、三重防护”"><a href="#4-2-“一个中心、三重防护”" class="headerlink" title="4.2 “一个中心、三重防护”"></a>4.2 “一个中心、三重防护”</h3><p>等保2.0 采用 <strong>“一个中心、三重防护”</strong> 的防护理念：</p>
+<ul>
+<li><strong>一个中心</strong>：安全管理中心（对整个系统进行集中管控、审计管理、系统管理和安全管理）；</li>
+<li><strong>三重防护</strong>：安全通信网络、安全区域边界、安全计算环境三道防线，形成<strong>纵深防御</strong>体系。</li>
+</ul>
+<h3 id="4-3-安全通用要求-安全扩展要求"><a href="#4-3-安全通用要求-安全扩展要求" class="headerlink" title="4.3 安全通用要求 + 安全扩展要求"></a>4.3 安全通用要求 + 安全扩展要求</h3><p>每个等级的安全要求分为两部分：</p>
+<p><strong>（1）安全通用要求</strong>（无论什么形态的保护对象都必须满足），细分为：</p>
+<ul>
+<li><strong>技术要求（5 项）</strong>：安全物理环境、安全通信网络、安全区域边界、安全计算环境、安全管理中心；</li>
+<li><strong>管理要求（5 项）</strong>：安全管理制度、安全管理机构、安全管理人员、安全建设管理、安全运维管理。</li>
+</ul>
+<p><strong>（2）安全扩展要求</strong>（针对特定技术&#x2F;场景额外增加），包括 4 类：</p>
+<ul>
+<li><strong>云计算安全扩展要求</strong>（虚拟化安全、镜像和快照保护等）；</li>
+<li><strong>移动互联安全扩展要求</strong>（移动终端管控、移动应用管控等）；</li>
+<li><strong>物联网安全扩展要求</strong>（感知节点安全、网关节点安全等）；</li>
+<li><strong>工业控制系统安全扩展要求</strong>（控制设备安全、网络架构安全等）。</li>
+</ul>
+<h2 id="五、等保2-0的主要变化"><a href="#五、等保2-0的主要变化" class="headerlink" title="五、等保2.0的主要变化"></a>五、等保2.0的主要变化</h2><p>相比 1.0，等保2.0 的变化可以概括为四点：</p>
+<ol>
+<li><strong>保护对象扩展</strong>：从狭义的”信息系统”扩展到网络基础设施、云计算平台&#x2F;系统、大数据平台&#x2F;系统、物联网、工业控制系统、移动互联系统等，覆盖”等级保护对象”（含信息系统、通信网络设施和数据资源）。</li>
+<li><strong>防护思路升级</strong>：从被动防护走向<strong>综合防御、纵深防御、主动防御</strong>，强化”一个中心、三重防护”的体系化防护。</li>
+<li><strong>强化可信验证</strong>：把可信验证列入各级别要求，强调通过密码技术、可信验证、安全审计、态势感知建立主动防御体系。</li>
+<li><strong>要求分类更清晰</strong>：安全要求划分为”安全通用要求+安全扩展要求”，按对象形态灵活选用，避免了”一刀切”。</li>
+</ol>
+<h2 id="六、我的理解"><a href="#六、我的理解" class="headerlink" title="六、我的理解"></a>六、我的理解</h2><p>学完等保2.0，我最大的感受是：<strong>等级保护不是一套”买设备”的清单，而是一套”先认清自己，再分级保护”的治理思路。</strong></p>
+<p>首先，等保2.0 解决的是”<strong>保护到什么程度</strong>“的问题。不同系统面临的威胁和影响不同，一个校园论坛和一个银行核心系统，安全投入和防护强度显然不能一样。通过定级，把有限的资源用在最关键的资产上，这本身就是一种科学的安全管理。</p>
+<p>其次，等保2.0 强调<strong>管理与技术并重</strong>。”安全物理环境”到”安全管理中心”是技术措施，”安全管理制度”到”安全运维管理”是管理措施——很多安全事件不是技术不行，而是管理制度缺失（账号共用、补丁不打、日志不审）。等保把这两条腿都列进要求，才是完整的安全体系。</p>
+<p>第三，等保2.0 对安全从业者是<strong>实操性很强的指引</strong>。拿到一个系统，可以按”定级→备案→建设整改→等级测评→监督检查”的流程走一遍，每一级对应哪些通用要求、哪些扩展要求，标准里都写得清清楚楚。它既是合规要求，也是一份很好的安全建设”施工图”。</p>
+<p>作为信息安全专业的学生，我认为等保2.0 是进入安全行业必须吃透的基础制度——它把”安全”从抽象的概念变成了可分级、可测评、可监督的具体标准，是中国特色网络安全治理体系的重要组成。</p>
+<hr>
+<p><strong>参考资料</strong>：</p>
+<ol>
+<li>公安部网络安全保卫局《网络安全等级保护2.0标准解读》</li>
+<li>GB&#x2F;T 22239-2019《信息安全技术 网络安全等级保护基本要求》</li>
+<li>GB&#x2F;T 22240-2020《信息安全技术 网络安全等级保护定级指南》</li>
+<li>《中华人民共和国网络安全法》</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://gulululu1734.github.io">gulululu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://gulululu1734.github.io/2026/10/05/%E5%AF%B9%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A42.0%E7%9A%84%E7%90%86%E8%A7%A3/">https://gulululu1734.github.io/2026/10/05/%E5%AF%B9%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A42.0%E7%9A%84%E7%90%86%E8%A7%A3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://gulululu1734.github.io" target="_blank">咕噜噜的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AD%89%E4%BF%9D2-0/">等保2.0</a><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A4/">网络安全等级保护</a><a class="post-meta__tags" href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">信息安全</a><a class="post-meta__tags" href="/tags/GB-T-22239/">GB/T 22239</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/10/25/%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8FZoomEye%E7%B1%BB%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%B8%8E%E5%AD%90%E5%9F%9F%E5%90%8D%E6%94%B6%E9%9B%86/" title="被动扫描：ZoomEye类搜索引擎与子域名收集"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">被动扫描：ZoomEye类搜索引擎与子域名收集</div></div><div class="info-2"><div class="info-item-1">第3章被动扫描作业：ZoomEye 类搜索引擎与子域名收集 作业内容：① 与 ZoomEye 功能类似的搜索引擎还有哪些？② 结合 ZoomEye 等进行相关搜索，截图；③ 如何进行子域名收集，截图。发布到自己的 Blog。   一、被动扫描与 OSINT被动扫描（Passive Scanning） 指在目标无法觉察的情况下进行的信息收集：只使用公开渠道可获得的信息，与目标系统不产生直接交互，尽量避免留下任何痕迹。它对应的是OSINT（Open Source Intelligence，公开来源情报），是渗透测试”知己知彼”的第一步。 被动扫描收集的信息包括：  域名、子域名、IP 地址、开放端口（通过 DNS、whois、证书透明度等公开数据）； 网站指纹：CMS 类型、Web 服务器、中间件版本、前端&#x2F;后端框架； 目标机构的公开信息：电子邮箱、员工社交账号、历史泄露记录； 图片元数据（Exif）：拍摄设备、GPS 位置等隐私信息。  常见的被动扫描工具&#x2F;平台：ZoomEye、Shodan、FOFA、Censys、Maltego、Recon-NG、Google...</div></div></div></a><a class="pagination-related" href="/2026/10/01/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="网络渗透测试学习记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">网络渗透测试学习记录</div></div><div class="info-2"><div class="info-item-1">网络渗透测试学习记录 学习提醒：渗透测试只能在自己拥有授权的环境下进行，未经授权对任何网站、主机进行扫描、攻击属于违法行为。  今日学习内容 Kali Linux 环境熟悉 虚拟机基础、端口概念 网站本地搭建（Hexo博客）  知识点 localhost：本机回环地址，只在电脑内部访问 端口：程序对外通信的入口，比如本次Hexo使用4000端口 防火墙：控制程序网络访问权限  学习心得搭建Hexo博客可以用来记录渗透测试笔记，整理命令和漏洞原理。  ⚠️法律红线：任何未获得书面授权的渗透、扫描行为，都违反《网络安全法》。  </div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">gulululu</div><div class="author-info-description">记录渗透测试与网络安全学习之路：Kali、CTF、流量分析、实验笔记。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/gulululu1734" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A42-0%EF%BC%88%E7%AD%89%E4%BF%9D2-0%EF%BC%89%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">对网络安全等级保护2.0（等保2.0）的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E7%AD%89%E4%BF%9D2-0"><span class="toc-number">1.1.</span> <span class="toc-text">一、什么是等保2.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BB%8E-1-0-%E5%88%B0-2-0%EF%BC%9A%E5%88%B6%E5%BA%A6%E5%8D%87%E7%BA%A7%E7%9A%84%E8%83%8C%E6%99%AF"><span class="toc-number">1.2.</span> <span class="toc-text">二、从 1.0 到 2.0：制度升级的背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%AD%89%E4%BF%9D2-0%E7%9A%84%E7%AD%89%E7%BA%A7%E5%88%92%E5%88%86"><span class="toc-number">1.3.</span> <span class="toc-text">三、等保2.0的等级划分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%AD%89%E4%BF%9D2-0%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A1%86%E6%9E%B6"><span class="toc-number">1.4.</span> <span class="toc-text">四、等保2.0的核心框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%A0%87%E5%87%86%E4%BD%93%E7%B3%BB"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 标准体系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E2%80%9C%E4%B8%80%E4%B8%AA%E4%B8%AD%E5%BF%83%E3%80%81%E4%B8%89%E9%87%8D%E9%98%B2%E6%8A%A4%E2%80%9D"><span class="toc-number">1.4.2.</span> <span class="toc-text">4.2 “一个中心、三重防护”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E5%AE%89%E5%85%A8%E9%80%9A%E7%94%A8%E8%A6%81%E6%B1%82-%E5%AE%89%E5%85%A8%E6%89%A9%E5%B1%95%E8%A6%81%E6%B1%82"><span class="toc-number">1.4.3.</span> <span class="toc-text">4.3 安全通用要求 + 安全扩展要求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%AD%89%E4%BF%9D2-0%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8F%98%E5%8C%96"><span class="toc-number">1.5.</span> <span class="toc-text">五、等保2.0的主要变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%88%91%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.6.</span> <span class="toc-text">六、我的理解</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/02/%E7%AC%91%E8%84%B8%E6%BC%8F%E6%B4%9E%E6%A3%80%E6%B5%8BPoC%E4%B8%8E%E7%9A%AE%E5%8D%A1%E4%B8%98%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/" title="笑脸漏洞检测PoC与皮卡丘靶场搭建">笑脸漏洞检测PoC与皮卡丘靶场搭建</a><time datetime="2026-11-02T14:30:00.000Z" title="发表于 2026-11-02 22:30:00">2026-11-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/10/26/QQ%20%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90%EF%BC%88PC%E2%80%93PC%20%E7%AB%AF%E3%80%81PC%E2%80%93%E6%89%8B%E6%9C%BA%E7%AB%AF%EF%BC%89/" title="QQ流量分析">QQ流量分析</a><time datetime="2026-10-26T04:00:00.000Z" title="发表于 2026-10-26 12:00:00">2026-10-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/10/25/%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8FZoomEye%E7%B1%BB%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%B8%8E%E5%AD%90%E5%9F%9F%E5%90%8D%E6%94%B6%E9%9B%86/" title="被动扫描：ZoomEye类搜索引擎与子域名收集">被动扫描：ZoomEye类搜索引擎与子域名收集</a><time datetime="2026-10-25T12:00:00.000Z" title="发表于 2026-10-25 20:00:00">2026-10-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/10/05/%E5%AF%B9%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A42.0%E7%9A%84%E7%90%86%E8%A7%A3/" title="对网络安全等级保护2.0（等保2.0）的理解">对网络安全等级保护2.0（等保2.0）的理解</a><time datetime="2026-10-05T12:00:00.000Z" title="发表于 2026-10-05 20:00:00">2026-10-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/10/01/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="网络渗透测试学习记录">网络渗透测试学习记录</a><time datetime="2026-09-30T16:41:00.000Z" title="发表于 2026-10-01 00:41:00">2026-10-01</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By gulululu</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
